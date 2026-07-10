@@ -2,7 +2,8 @@
 import { useEffect, useState } from "react";
 import { api, imgUrl, type Exercise } from "@/lib/api";
 import { cap, daysAgo } from "@/lib/format";
-import { BackIcon, PhotoIcon, PlusIcon } from "./icons";
+import { BackIcon, PhotoIcon, PlusIcon, RoutineIcon } from "./icons";
+import AddToRoutine from "./AddToRoutine";
 
 export default function ExerciseDetail({
   exId,
@@ -16,6 +17,7 @@ export default function ExerciseDetail({
   onLog: (ex: Exercise) => void;
 }) {
   const [ex, setEx] = useState<Exercise | null>(null);
+  const [sheet, setSheet] = useState(false);
 
   useEffect(() => {
     let on = true;
@@ -98,10 +100,17 @@ export default function ExerciseDetail({
       </div>
 
       <div className="cta">
-        <button className="btn primary" onClick={() => onLog(ex)}>
-          <PlusIcon s={16} /> Log today&apos;s sets
-        </button>
+        <div className="cta-row">
+          <button className="btn ghost icon-only" onClick={() => setSheet(true)} title="Add to routine" aria-label="Add to routine">
+            <RoutineIcon s={17} />
+          </button>
+          <button className="btn primary" onClick={() => onLog(ex)}>
+            <PlusIcon s={16} /> Log today&apos;s sets
+          </button>
+        </div>
       </div>
+
+      {sheet && <AddToRoutine exerciseId={ex.id} exerciseName={ex.name} onClose={() => setSheet(false)} />}
     </>
   );
 }
