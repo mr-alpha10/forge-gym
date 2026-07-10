@@ -27,7 +27,7 @@ body {
 .statusbar .dots i { width: 5px; height: 5px; border-radius: 50%; background: var(--txt-3); display: block; }
 .statusbar .dots .bat { width: 20px; height: 10px; border: 1px solid var(--txt-3); border-radius: 2px; position: relative; }
 .statusbar .dots .bat::after { content: ""; position: absolute; inset: 2px; right: 6px; background: var(--accent-2); border-radius: 1px; }
-.viewport { flex: 1; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; padding-top: 12px; }
+.viewport { flex: 1; overflow-y: auto; overflow-x: hidden; scrollbar-width: none; padding-top: 8px; }
 .viewport::-webkit-scrollbar { display: none; }
 .screen { padding: 8px 22px 40px; animation: rise 0.45s cubic-bezier(0.2, 0.7, 0.2, 1); }
 @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
