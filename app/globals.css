@@ -300,3 +300,75 @@ h2.scr-title { font-family: var(--serif); font-style: italic; font-weight: 500; 
   box-shadow: 0 10px 40px -8px var(--glow);
 }
 .sheet-done-t { font-size: 15px; font-weight: 500; }
+
+
+/* ---- Animated background — append to the end of app/globals.css ---- */
+/* Pure CSS. No file, no video decoder. Slow-drifting purple glows over the
+   dark base, faded low so it reads as atmosphere behind the app. */
+
+.bg-aura {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--bg);
+}
+
+.bg-aura span {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.5;
+  will-change: transform;
+}
+
+/* Three orbs at different sizes, positions, tints and speeds so the motion
+   never looks like it's on a loop timer. */
+.bg-aura .o1 {
+  width: 46vh; height: 46vh;
+  top: -8%; left: -6%;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.55), transparent 68%);
+  animation: drift1 26s ease-in-out infinite;
+}
+.bg-aura .o2 {
+  width: 38vh; height: 38vh;
+  bottom: -10%; right: -6%;
+  background: radial-gradient(circle, rgba(167, 139, 250, 0.4), transparent 68%);
+  animation: drift2 34s ease-in-out infinite;
+}
+.bg-aura .o3 {
+  width: 30vh; height: 30vh;
+  top: 42%; left: 50%;
+  background: radial-gradient(circle, rgba(88, 40, 180, 0.4), transparent 70%);
+  animation: drift3 30s ease-in-out infinite;
+}
+
+/* A faint vignette so edges stay dark and text stays readable. */
+.bg-aura::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 90% at 50% 20%, transparent 40%, rgba(6, 6, 10, 0.75) 100%);
+}
+
+@keyframes drift1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(18vw, 12vh) scale(1.15); }
+}
+@keyframes drift2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(-16vw, -10vh) scale(1.1); }
+}
+@keyframes drift3 {
+  0%, 100% { transform: translate(-50%, 0) scale(1); }
+  50%      { transform: translate(-35%, -14vh) scale(1.2); }
+}
+
+/* Respect users who ask for less motion — hold the orbs still. */
+@media (prefers-reduced-motion: reduce) {
+  .bg-aura span { animation: none; }
+}
+
+/* Keep the app above the background. */
+.phone { position: relative; z-index: 1; }

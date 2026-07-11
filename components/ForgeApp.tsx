@@ -171,6 +171,11 @@ export default function ForgeApp() {
 
   return (
     <>
+    <div className="bg-aura" aria-hidden="true">
+      <span className="o1" />
+      <span className="o2" />
+      <span className="o3" />
+    </div>
       <svg className="grain" xmlns="http://www.w3.org/2000/svg">
         <filter id="grain-noise">
           <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves={3} />
